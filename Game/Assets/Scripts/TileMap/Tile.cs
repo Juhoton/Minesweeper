@@ -17,6 +17,8 @@ public class Tile : MonoBehaviour
         if (isMine)
         {
             Debug.Log("Get slimed nerd");
+            GetComponent<SpriteRenderer>().color = Color.red;
+            isRevealed = true;
         }
         else
         {
@@ -45,7 +47,13 @@ public class Tile : MonoBehaviour
     public void ShowAdcjacentMines()
     {
         {
-            GetComponentInChildren<TextMeshPro>().text = adjacentMines.ToString();
+            if (isMine)
+            {
+                GetComponentInChildren<TextMeshPro>().text = "X";
+            } else
+            {
+                GetComponentInChildren<TextMeshPro>().text = adjacentMines.ToString();
+            }
         }
     }
     public void HideAdjacentMines()
