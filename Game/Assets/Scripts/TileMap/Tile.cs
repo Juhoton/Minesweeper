@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(Collider2D))]
 public class Tile : MonoBehaviour
@@ -12,13 +11,10 @@ public class Tile : MonoBehaviour
     public bool isFlagged = false;
     public int adjacentMines;
 
+
     public void Reveal()
     {
-        if (isMine)
-        {
-            Debug.Log("Get slimed nerd");
-        }
-        else
+        if (!isRevealed)
         {
             Debug.Log("Ei oo miinaa");
             GetComponent<SpriteRenderer>().color = Color.black;
@@ -51,5 +47,11 @@ public class Tile : MonoBehaviour
     public void HideAdjacentMines()
     {
         GetComponentInChildren<TextMeshPro>().text = "";
+    }
+
+    // Checks if mine for lose condition
+    public bool CheckMine()
+    {
+        return isMine;
     }
 }
