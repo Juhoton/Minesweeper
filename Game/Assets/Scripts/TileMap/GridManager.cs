@@ -8,6 +8,7 @@ public class GridManager : MonoBehaviour
     public Tile[,] grid;
     public Camera mainCamera;
     private bool isFirstClick = true;
+    [SerializeField] TimeManager timeManager;
 
     void Start()
     {
@@ -16,6 +17,9 @@ public class GridManager : MonoBehaviour
 
     void Update()
     {
+        if (PauseMenu.IsPaused)
+            return;
+
         if (Input.GetMouseButtonDown(0))
         {
             Tile tile = GetTileUnderCursor();
@@ -106,6 +110,7 @@ public class GridManager : MonoBehaviour
         {
             PlaceMines(tile.x, tile.y);
             isFirstClick = false;
+            timeManager.StartTimer(); // starts game timer on first click
             foreach (Tile gridTile in grid)
             {
                 gridTile.adjacentMines = CountAdjacentMines(gridTile.x, gridTile.y);
