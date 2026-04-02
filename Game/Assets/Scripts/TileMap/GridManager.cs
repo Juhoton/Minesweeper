@@ -1,19 +1,28 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GridManager : MonoBehaviour
 {
-    public int gridSize = 10;
-    public int mineCount = 20;
+    [SerializeField] private int gridSize = 10;
+    [SerializeField] private int mineCount = 20;
+    [SerializeField] private int tilesLeft;
     public GameObject tilePrefab;
     public Tile[,] grid;
     public Camera mainCamera;
     private bool isFirstClick = true;
     [SerializeField] TimeManager timeManager;
 
-    void Start()
+    public UnityEvent mineExploded;
+    public UnityEvent<int> tileCount;
+
+    void Awake()
     {
         GenerateGrid();
+
+        if (mineExploded == null) mineExploded = new UnityEvent();
+        if (tileCount == null) tileCount = new UnityEvent<int>();
     }
+
 
     void Update()
     {
@@ -55,6 +64,7 @@ public class GridManager : MonoBehaviour
                 grid[x, y] = tile;
             }
         }
+        tilesLeft = gridSize * gridSize - mineCount;
     }
 
     // Random for now
@@ -128,7 +138,14 @@ public class GridManager : MonoBehaviour
         if (tile.isRevealed || tile.isFlagged)
             return;
 
+        if (tile.CheckMine())
+        {
+            mineExploded.Invoke();
+            return;
+        }
         tile.Reveal();
+        tilesLeft -= 1;
+        tileCount.Invoke(tilesLeft);
 
         if (tile.adjacentMines == 0 && !tile.isMine)
         {

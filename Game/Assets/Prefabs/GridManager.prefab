@@ -46,5 +46,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridSize: 10
   mineCount: 20
+  tilesLeft: 0
   tilePrefab: {fileID: 6479071910532389095, guid: 6921587487d6350f1a06313befe68fa5, type: 3}
-  mainCamera: {fileID: 0}
+  mainCamera: {fileID: 3012592173297187441, guid: 58a2cc789a780394683129b2b69123bf, type: 3}
+  mineExploded:
+    m_PersistentCalls:
+      m_Calls: []
+  tileCount:
+    m_PersistentCalls:
+      m_Calls: []
