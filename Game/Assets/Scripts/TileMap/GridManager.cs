@@ -48,9 +48,12 @@ public class GridManager : MonoBehaviour
         grid = new Tile[gridSize, gridSize];
         for (int x = 0; x < gridSize; x++)
         {
+            Debug.Log("x");
             for (int y = 0; y < gridSize; y++)
             {
-                Vector3 position = new Vector3(x - gridSize / 2, y - gridSize / 2, 0);
+                Debug.Log("y");
+                // We want to build the grid around 0, 0, 0
+                Vector3 position = new Vector3(x - (gridSize - 1) / 2f, y - (gridSize - 1) / 2f, 0);
                 GameObject tileObject = Instantiate(tilePrefab, position, Quaternion.identity);
                 Tile tile = tileObject.GetComponent<Tile>();
 
@@ -208,6 +211,20 @@ public class GridManager : MonoBehaviour
             }
         }
         tile.HideAdjacentMines();
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+
+        float size = gridSize;
+
+        // Center is at (0,0,0) because of your offset logic
+        Vector3 center = Vector3.zero;
+
+        Vector3 cubeSize = new Vector3(size, size, 0);
+
+        Gizmos.DrawWireCube(center, cubeSize);
     }
 
 }
