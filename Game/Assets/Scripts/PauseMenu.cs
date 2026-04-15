@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] GameObject pauseMenu;
+    [SerializeField] private Canvas gameOver;
     bool isPaused = false;
     public static bool IsPaused { get; private set; } // Makes the paused state accessible from other scripts (?)
 
@@ -12,6 +13,9 @@ public class PauseMenu : MonoBehaviour
     void Start()
     {
         pauseMenu.SetActive(false);
+        isPaused = false;
+        IsPaused = false;
+        Time.timeScale = 1f; // Ensure the game starts unpaused
     }
 
     // Update is called once per frame
@@ -25,6 +29,11 @@ public class PauseMenu : MonoBehaviour
 
     public void TogglePause()
     {
+        if (gameOver.isActiveAndEnabled)
+        {
+            return;
+        }
+
         isPaused = !isPaused;
         IsPaused = isPaused;
 
