@@ -11,6 +11,7 @@ public class GridManager : MonoBehaviour
     public Camera mainCamera;
     private bool isFirstClick = true;
     [SerializeField] TimeManager timeManager;
+    [SerializeField] private Canvas gameOver;
 
     public UnityEvent mineExploded;
     public UnityEvent<int> tileCount;
@@ -26,8 +27,10 @@ public class GridManager : MonoBehaviour
 
     void Update()
     {
-        if (PauseMenu.IsPaused)
+        if (PauseMenu.IsPaused || gameOver.isActiveAndEnabled) {
             return;
+        }
+            
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -143,6 +146,7 @@ public class GridManager : MonoBehaviour
 
         if (tile.CheckMine())
         {
+            tile.GetComponent<SpriteRenderer>().color = Color.red;
             mineExploded.Invoke();
             return;
         }
