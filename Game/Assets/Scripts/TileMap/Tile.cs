@@ -41,7 +41,13 @@ public class Tile : MonoBehaviour
     public void ShowAdcjacentMines()
     {
         {
-            GetComponentInChildren<TextMeshPro>().text = adjacentMines.ToString();
+            if (isMine)
+            {
+                GetComponentInChildren<TextMeshPro>().text = "X";
+            } else
+            {
+                GetComponentInChildren<TextMeshPro>().text = adjacentMines.ToString();
+            }
         }
     }
     public void HideAdjacentMines()
