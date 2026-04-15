@@ -4,6 +4,10 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private GridManager gridM;
+    [SerializeField] private TimeManager timeM;
+    [SerializeField] private Canvas pause;
+    [SerializeField] private Canvas gameOver;
+    [SerializeField] private Canvas youWin;
 
 
     void Start()
@@ -11,6 +15,10 @@ public class GameManager : MonoBehaviour
         gridM = GetComponentInChildren<GridManager>();
 
         StartEventListeners();
+
+        pause.gameObject.SetActive(false);
+        gameOver.gameObject.SetActive(false);
+        youWin.gameObject.SetActive(false);
     }
 
     // starts the event listener for win and lose condition
@@ -36,7 +44,9 @@ public class GameManager : MonoBehaviour
     private void TriggerLoseCondition()
     {
         Debug.Log("BOOM!!! Hävisit pelin");
-        ResetGame();
+        
+        timeM.StopTimer();
+        gameOver.gameObject.SetActive(true);
     }
 
     // Resets the current scene
