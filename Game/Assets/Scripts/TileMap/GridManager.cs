@@ -193,11 +193,6 @@ public class GridManager : MonoBehaviour
         bool unrevealedTiles = false;
         for (int dx = -1; dx <= 1; dx++)
         {
-            if (unrevealedTiles)
-            {
-                tile.ShowAdcjacentMines();
-                return;
-            }
             for (int dy = -1; dy <= 1; dy++)
             {
                 int nx = tile.x + dx;
@@ -214,17 +209,21 @@ public class GridManager : MonoBehaviour
                     }
                 }
             }
+            if (unrevealedTiles)
+            {
+                tile.ShowAdcjacentMines();
+                return;
+            }
         }
         tile.HideAdjacentMines();
     }
 
     void OnDrawGizmos()
     {
-        Gizmos.color = Color.yellow;
+        Gizmos.color = Color.red;
 
         float size = gridSize;
 
-        // Center is at (0,0,0) because of your offset logic
         Vector3 center = Vector3.zero;
 
         Vector3 cubeSize = new Vector3(size, size, 0);
