@@ -27,10 +27,11 @@ public class GridManager : MonoBehaviour
 
     void Update()
     {
-        if (PauseMenu.IsPaused || gameOver.isActiveAndEnabled) {
+        if (PauseMenu.IsPaused || gameOver.isActiveAndEnabled)
+        {
             return;
         }
-            
+
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -55,10 +56,8 @@ public class GridManager : MonoBehaviour
         grid = new Tile[gridSize, gridSize];
         for (int x = 0; x < gridSize; x++)
         {
-            Debug.Log("x");
             for (int y = 0; y < gridSize; y++)
             {
-                Debug.Log("y");
                 // We want to build the grid around 0, 0, 0
                 Vector3 position = new Vector3(x - (gridSize - 1) / 2f, y - (gridSize - 1) / 2f, 0);
                 GameObject tileObject = Instantiate(tilePrefab, position, Quaternion.identity);
