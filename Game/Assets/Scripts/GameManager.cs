@@ -73,6 +73,7 @@ public class GameManager : MonoBehaviour
     private void TriggerWinCondition()
     {
         Debug.Log("Mestarityötä! Voitit pelin");
+        AudioManager.Instance.PlayWinGame();
         youWin.gameObject.SetActive(true);
     }
 
@@ -80,7 +81,7 @@ public class GameManager : MonoBehaviour
     private void TriggerLoseCondition()
     {
         Debug.Log("BOOM!!! Hävisit pelin");
-
+        AudioManager.Instance.PlayLoseGame();
         timeM.StopTimer();
         gameOver.gameObject.SetActive(true);
     }
