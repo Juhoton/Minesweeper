@@ -160,7 +160,7 @@ PrefabInstance:
       objectReference: {fileID: 2034733583}
     - target: {fileID: 1749358055395400042, guid: c2869128c224a27dbb613b5da51bacd3, type: 3}
       propertyPath: mineCountEasy
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1903531217892292728, guid: c2869128c224a27dbb613b5da51bacd3, type: 3}
       propertyPath: m_Name
