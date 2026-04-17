@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 public class GridManager : MonoBehaviour
 {
-    // 1 tile = 1 Unity unit (IMPORTANT: no pixel math anymore)
+    // 1 tile = 1 Unity unit
     private const float tileSize = 1f;
 
     // Pidä gridsize parillisena

@@ -24,7 +24,6 @@ public class AudioManager : MonoBehaviour
 
     void Awake()
     {
-        // Simple singleton (keeps one audio manager alive)
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -47,9 +46,9 @@ public class AudioManager : MonoBehaviour
         musicSource.volume = musicVolume;
     }
 
-    // -----------------------
+    
     // PUBLIC CALLABLE METHODS
-    // -----------------------
+    
 
     public void PlayButtonClick()
     {
@@ -75,11 +74,9 @@ public class AudioManager : MonoBehaviour
     {
         PlaySFX(loseGame);
     }
-
-    // -----------------------
+    
     // CORE SFX FUNCTION
-    // -----------------------
-
+    
     private void PlaySFX(AudioClip clip)
     {
         if (clip == null) return;
@@ -87,9 +84,7 @@ public class AudioManager : MonoBehaviour
         sfxSource.PlayOneShot(clip, sfxVolume);
     }
 
-    // -----------------------
-    // MUSIC (optional future use)
-    // -----------------------
+    // MUSIC
 
     public void PlayMusic(AudioClip clip, bool loop = true)
     {
@@ -106,9 +101,7 @@ public class AudioManager : MonoBehaviour
         musicSource.Stop();
     }
 
-    // -----------------------
     // VOLUME CONTROL
-    // -----------------------
 
     public void SetSFXVolume(float value)
     {
