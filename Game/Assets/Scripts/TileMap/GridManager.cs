@@ -151,6 +151,15 @@ public class GridManager : MonoBehaviour
                 gridTile.adjacentMines = CountAdjacentMines(gridTile.x, gridTile.y);
         }
 
+        if (tile.CheckMine())
+        {
+            AudioManager.Instance?.PlayBombClick();
+        }
+        else
+        {
+            AudioManager.Instance?.PlayGridClick();
+        }
+
         RevealTile(tile);
 
         foreach (Tile gridTile in grid)
