@@ -10,6 +10,7 @@ public class SaveData : MonoBehaviour
     void Awake()
     {
         path = Application.persistentDataPath + "/Scores.json";
+        Debug.Log("SavedataLoad");
     }
 
     public void Save(string name, string difficulty, string time)

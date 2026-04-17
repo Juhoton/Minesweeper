@@ -16,6 +16,12 @@ public class MainMenu : MonoBehaviour
         mainMenuManager.SetActiveCanvas(1);
     }
 
+    public void HighScore()
+    {
+        Debug.Log("Go to highscores!");
+        mainMenuManager.SetActiveCanvas(2);
+    }
+
     public void QuitGame()
     {
         Debug.Log("Quit!");
