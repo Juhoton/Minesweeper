@@ -11,14 +11,19 @@ public class Tile : MonoBehaviour
     public bool isFlagged = false;
     public int adjacentMines;
 
-
     public void Reveal()
     {
         if (!isRevealed)
         {
-            Debug.Log("Ei oo miinaa");
-            GetComponent<SpriteRenderer>().color = Color.black;
             isRevealed = true;
+
+            if (isMine)
+            {        
+                GetComponent<SpriteRenderer>().color = Color.red;
+                return;
+            }
+
+            GetComponent<SpriteRenderer>().color = Color.black;
         }
     }
 
@@ -26,6 +31,7 @@ public class Tile : MonoBehaviour
     {
         if (isRevealed)
             return;
+
         if (isFlagged)
         {
             GetComponent<SpriteRenderer>().color = Color.white;
@@ -40,22 +46,21 @@ public class Tile : MonoBehaviour
 
     public void ShowAdcjacentMines()
     {
+        if (isMine)
         {
-            if (isMine)
-            {
-                GetComponentInChildren<TextMeshPro>().text = "X";
-            } else
-            {
-                GetComponentInChildren<TextMeshPro>().text = adjacentMines.ToString();
-            }
+            GetComponentInChildren<TextMeshPro>().text = "X";
+        }
+        else
+        {
+            GetComponentInChildren<TextMeshPro>().text = adjacentMines.ToString();
         }
     }
+
     public void HideAdjacentMines()
     {
         GetComponentInChildren<TextMeshPro>().text = "";
     }
 
-    // Checks if mine for lose condition
     public bool CheckMine()
     {
         return isMine;

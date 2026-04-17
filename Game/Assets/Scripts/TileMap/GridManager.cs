@@ -1,18 +1,28 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class GridManager : MonoBehaviour
 {
+    // 1 tile = 1 Unity unit
+    private const float tileSize = 1f;
+
     // Pidä gridsize parillisena
     [SerializeField] private int gridSize = 10;
+
     [SerializeField] private int mineCount = 20;
     [SerializeField] private int tilesLeft;
+
     public GameObject tilePrefab;
     public Tile[,] grid;
     public Camera mainCamera;
+
     private bool isFirstClick = true;
+
     [SerializeField] TimeManager timeManager;
     [SerializeField] private Canvas gameOver;
+    [SerializeField] private GameObject mineSpawn;
+    [SerializeField] public TextMeshProUGUI mineCountText;
 
     public UnityEvent mineExploded;
     public UnityEvent<int> tileCount;
@@ -20,6 +30,7 @@ public class GridManager : MonoBehaviour
     void Start()
     {
         GenerateGrid();
+        mineCountText.text = $"{mineCount}";
 
         if (mineExploded == null) mineExploded = new UnityEvent();
         if (tileCount == null) tileCount = new UnityEvent<int>();
@@ -28,30 +39,23 @@ public class GridManager : MonoBehaviour
         mainCamera.orthographicSize = gridSize / 2 + 1; // gridsize/2 scalee 1:1 gridsizen kanssa.
     }
 
-
     void Update()
     {
         if (PauseMenu.IsPaused)
-        {
             return;
-        }
 
 
         if (Input.GetMouseButtonDown(0))
         {
             Tile tile = GetTileUnderCursor();
             if (tile != null)
-            {
                 HandleTileLeftClick(tile);
-            }
         }
         else if (Input.GetMouseButtonDown(1))
         {
             Tile tile = GetTileUnderCursor();
             if (tile != null)
-            {
                 HandleTileRightClick(tile);
-            }
         }
     }
 
@@ -67,13 +71,21 @@ public class GridManager : MonoBehaviour
     public void GenerateGrid()
     {
         grid = new Tile[gridSize, gridSize];
+
         for (int x = 0; x < gridSize; x++)
         {
             for (int y = 0; y < gridSize; y++)
             {
-                // We want to build the grid around 0, 0, 0
-                Vector3 position = new Vector3(x - (gridSize - 1) / 2f, y - (gridSize - 1) / 2f, 0);
-                GameObject tileObject = Instantiate(tilePrefab, position, Quaternion.identity);
+                float gridWorldSize = gridSize * tileSize;
+
+                Vector3 position = new Vector3(
+                    x * tileSize - gridWorldSize / 2f + tileSize / 2f,
+                    y * tileSize - gridWorldSize / 2f + tileSize / 2f,
+                    0
+                );
+
+                GameObject tileObject = Instantiate(tilePrefab, position, Quaternion.identity, mineSpawn.transform);
+
                 Tile tile = tileObject.GetComponent<Tile>();
 
                 tile.x = x;
@@ -82,10 +94,10 @@ public class GridManager : MonoBehaviour
                 grid[x, y] = tile;
             }
         }
+
         tilesLeft = gridSize * gridSize - mineCount;
     }
 
-    // Random for now
     public void PlaceMines(int firstX, int firstY)
     {
         int placedMines = 0;
@@ -95,7 +107,6 @@ public class GridManager : MonoBehaviour
             int x = Random.Range(0, gridSize);
             int y = Random.Range(0, gridSize);
 
-            // Make tiles around first click safe
             if (Mathf.Abs(x - firstX) <= 1 && Mathf.Abs(y - firstY) <= 1)
                 continue;
 
@@ -138,17 +149,25 @@ public class GridManager : MonoBehaviour
         {
             PlaceMines(tile.x, tile.y);
             isFirstClick = false;
-            timeManager.StartTimer(); // starts game timer on first click
+            timeManager.StartTimer();
+
             foreach (Tile gridTile in grid)
-            {
                 gridTile.adjacentMines = CountAdjacentMines(gridTile.x, gridTile.y);
-            }
         }
-        RevealTile(tile);
-        foreach (Tile gridTile in grid)
+
+        if (tile.CheckMine())
         {
-            ShowAdjacentMines(gridTile);
+            AudioManager.Instance?.PlayBombClick();
         }
+        else
+        {
+            AudioManager.Instance?.PlayGridClick();
+        }
+
+        RevealTile(tile);
+
+        foreach (Tile gridTile in grid)
+            ShowAdjacentMines(gridTile);
     }
 
     public void RevealTile(Tile tile)
@@ -162,6 +181,7 @@ public class GridManager : MonoBehaviour
             mineExploded.Invoke();
             return;
         }
+
         tile.Reveal();
         tilesLeft -= 1;
         tileCount.Invoke(tilesLeft);
@@ -191,15 +211,11 @@ public class GridManager : MonoBehaviour
 
     public Tile GetTileUnderCursor()
     {
-        Vector2 mousePos = Input.mousePosition;
-        Vector2 worldPos = mainCamera.ScreenToWorldPoint(mousePos);
-
+        Vector2 worldPos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
         RaycastHit2D hit = Physics2D.Raycast(worldPos, Vector2.zero);
 
         if (hit.collider != null)
-        {
             return hit.collider.GetComponent<Tile>();
-        }
 
         return null;
     }
@@ -207,6 +223,7 @@ public class GridManager : MonoBehaviour
     public void ShowAdjacentMines(Tile tile)
     {
         bool unrevealedTiles = false;
+
         for (int dx = -1; dx <= 1; dx++)
         {
             for (int dy = -1; dy <= 1; dy++)
@@ -220,17 +237,17 @@ public class GridManager : MonoBehaviour
                 if (nx >= 0 && nx < gridSize && ny >= 0 && ny < gridSize)
                 {
                     if (!grid[nx, ny].isRevealed && tile.isRevealed)
-                    {
                         unrevealedTiles = true;
-                    }
                 }
             }
+
             if (unrevealedTiles)
             {
                 tile.ShowAdcjacentMines();
                 return;
             }
         }
+
         tile.HideAdjacentMines();
     }
 
@@ -238,13 +255,8 @@ public class GridManager : MonoBehaviour
     {
         Gizmos.color = Color.red;
 
-        float size = gridSize;
+        float size = gridSize * tileSize;
 
-        Vector3 center = Vector3.zero;
-
-        Vector3 cubeSize = new Vector3(size, size, 0);
-
-        Gizmos.DrawWireCube(center, cubeSize);
+        Gizmos.DrawWireCube(Vector3.zero, new Vector3(size, size, 0));
     }
-
 }
