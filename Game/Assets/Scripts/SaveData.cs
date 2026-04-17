@@ -12,7 +12,7 @@ public class SaveData : MonoBehaviour
         path = Application.persistentDataPath + "/Scores.json";
     }
 
-    public void Save(string name, string difficulty, int time)
+    public void Save(string name, string difficulty, string time)
     {
         ScoreList scoreList = Load();
 
@@ -26,8 +26,6 @@ public class SaveData : MonoBehaviour
 
         string json = JsonUtility.ToJson(scoreList);
         File.WriteAllText(path, json);
-
-        Debug.Log(newScore);
     }
 
     public ScoreList Load()
@@ -54,5 +52,5 @@ public class Score
 {
     public string name;
     public string difficulty;
-    public int time;
+    public string time;
 }
