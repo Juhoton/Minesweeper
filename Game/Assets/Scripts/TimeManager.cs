@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class TimeManager : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI timerText;
+    [SerializeField] public TextMeshProUGUI timerText;
     float elapsedTime = 0f;
     bool measuringTime = false;
 
@@ -17,7 +17,7 @@ public class TimeManager : MonoBehaviour
     {
         measuringTime = false;
         Debug.Log("Elapsed Time: " + elapsedTime + " seconds");
-    }   
+    }
 
     public void ResetTimer()
     {
