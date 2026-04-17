@@ -25,7 +25,7 @@ public class GridManager : MonoBehaviour
         if (tileCount == null) tileCount = new UnityEvent<int>();
 
         mainCamera = Camera.main;
-        mainCamera.orthographicSize = gridSize / 2 + 1;
+        mainCamera.orthographicSize = gridSize / 2 + 1; // gridsize/2 scalee 1:1 gridsizen kanssa.
     }
 
 
