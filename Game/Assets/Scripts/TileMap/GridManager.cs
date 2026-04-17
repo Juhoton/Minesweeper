@@ -3,6 +3,7 @@ using UnityEngine.Events;
 
 public class GridManager : MonoBehaviour
 {
+    // Pidä gridsize parillisena
     [SerializeField] private int gridSize = 10;
     [SerializeField] private int mineCount = 20;
     [SerializeField] private int tilesLeft;
@@ -22,6 +23,9 @@ public class GridManager : MonoBehaviour
 
         if (mineExploded == null) mineExploded = new UnityEvent();
         if (tileCount == null) tileCount = new UnityEvent<int>();
+
+        mainCamera = Camera.main;
+        mainCamera.orthographicSize = gridSize / 2 + 1;
     }
 
 

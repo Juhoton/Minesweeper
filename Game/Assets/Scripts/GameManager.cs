@@ -37,14 +37,14 @@ public class GameManager : MonoBehaviour
     private void TriggerWinCondition()
     {
         Debug.Log("Mestarityötä! Voitit pelin");
-        ResetGame();
+        youWin.gameObject.SetActive(true);
     }
 
     //
     private void TriggerLoseCondition()
     {
         Debug.Log("BOOM!!! Hävisit pelin");
-        
+
         timeM.StopTimer();
         gameOver.gameObject.SetActive(true);
     }
