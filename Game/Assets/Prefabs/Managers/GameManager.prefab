@@ -46,6 +46,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridM: {fileID: 0}
+  timeM: {fileID: 0}
+  pause: {fileID: 0}
+  gameOver: {fileID: 0}
+  youWin: {fileID: 0}
+  selectedDifficulty: 0
+  gridSizeEasy: 10
+  mineCountEasy: 20
+  gridSizeMedium: 16
+  mineCountMedium: 52
+  gridSizeHard: 24
+  mineCountHard: 116
 --- !u!1001 &6033126670678060062
 PrefabInstance:
   m_ObjectHideFlags: 0

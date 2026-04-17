@@ -3,10 +3,11 @@ using UnityEngine.Events;
 
 public class GridManager : MonoBehaviour
 {
-    private const int gridSize = 10;
-
     // 1 tile = 1 Unity unit (IMPORTANT: no pixel math anymore)
     private const float tileSize = 1f;
+
+    // Pidä gridsize parillisena
+    [SerializeField] private int gridSize = 10;
 
     [SerializeField] private int mineCount = 20;
     [SerializeField] private int tilesLeft;
@@ -24,12 +25,15 @@ public class GridManager : MonoBehaviour
     public UnityEvent mineExploded;
     public UnityEvent<int> tileCount;
 
-    void Awake()
+    void Start()
     {
         GenerateGrid();
 
         if (mineExploded == null) mineExploded = new UnityEvent();
         if (tileCount == null) tileCount = new UnityEvent<int>();
+
+        mainCamera = Camera.main;
+        mainCamera.orthographicSize = gridSize / 2 + 1; // gridsize/2 scalee 1:1 gridsizen kanssa.
     }
 
     void Update()
@@ -49,6 +53,15 @@ public class GridManager : MonoBehaviour
             if (tile != null)
                 HandleTileRightClick(tile);
         }
+    }
+
+    public void SetGridSize(int newGridSize)
+    {
+        gridSize = newGridSize;
+    }
+    public void SetMineCount(int newMineCount)
+    {
+        mineCount = newMineCount;
     }
 
     public void GenerateGrid()
