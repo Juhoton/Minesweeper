@@ -2,7 +2,7 @@
 - Project name: Game
 - Unity version: Unity 6000.0.71f1
 - Active scene:
-  - Name: Menu
+  - Name: High scores
   - Tags:
     - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController
   - Layers:

@@ -73,6 +73,9 @@ public class GameManager : MonoBehaviour
     private void TriggerWinCondition()
     {
         Debug.Log("Mestarityötä! Voitit pelin");
+
+        PauseMenu.IsPaused = true;
+        timeM.StopTimer();
         youWin.gameObject.SetActive(true);
     }
 
@@ -81,6 +84,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("BOOM!!! Hävisit pelin");
 
+        PauseMenu.IsPaused = true;
         timeM.StopTimer();
         gameOver.gameObject.SetActive(true);
     }
