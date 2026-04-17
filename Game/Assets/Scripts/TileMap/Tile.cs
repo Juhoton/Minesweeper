@@ -18,13 +18,11 @@ public class Tile : MonoBehaviour
             isRevealed = true;
 
             if (isMine)
-            {
-                AudioManager.Instance?.PlayBombClick();
+            {        
                 GetComponent<SpriteRenderer>().color = Color.red;
                 return;
             }
 
-            AudioManager.Instance?.PlayGridClick();
             GetComponent<SpriteRenderer>().color = Color.black;
         }
     }

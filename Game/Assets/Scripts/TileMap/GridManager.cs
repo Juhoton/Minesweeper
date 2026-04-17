@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -21,6 +22,7 @@ public class GridManager : MonoBehaviour
     [SerializeField] TimeManager timeManager;
     [SerializeField] private Canvas gameOver;
     [SerializeField] private GameObject mineSpawn;
+    [SerializeField] public TextMeshProUGUI mineCountText;
 
     public UnityEvent mineExploded;
     public UnityEvent<int> tileCount;
@@ -28,6 +30,7 @@ public class GridManager : MonoBehaviour
     void Start()
     {
         GenerateGrid();
+        mineCountText.text = $"{mineCount}";
 
         if (mineExploded == null) mineExploded = new UnityEvent();
         if (tileCount == null) tileCount = new UnityEvent<int>();
@@ -149,6 +152,15 @@ public class GridManager : MonoBehaviour
 
             foreach (Tile gridTile in grid)
                 gridTile.adjacentMines = CountAdjacentMines(gridTile.x, gridTile.y);
+        }
+
+        if (tile.CheckMine())
+        {
+            AudioManager.Instance?.PlayBombClick();
+        }
+        else
+        {
+            AudioManager.Instance?.PlayGridClick();
         }
 
         RevealTile(tile);

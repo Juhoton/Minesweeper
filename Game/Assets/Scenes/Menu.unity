@@ -515,34 +515,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: DifficultyCanvas
       objectReference: {fileID: 0}
-    - target: {fileID: 5806384580655744316, guid: 0d02e7dad9fbf8f44a1e7cba0feb51f2, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6772774298280391047, guid: 0d02e7dad9fbf8f44a1e7cba0feb51f2, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6772774298280391047, guid: 0d02e7dad9fbf8f44a1e7cba0feb51f2, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6772774298280391047, guid: 0d02e7dad9fbf8f44a1e7cba0feb51f2, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6772774298280391047, guid: 0d02e7dad9fbf8f44a1e7cba0feb51f2, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6772774298280391047, guid: 0d02e7dad9fbf8f44a1e7cba0feb51f2, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6772774298280391047, guid: 0d02e7dad9fbf8f44a1e7cba0feb51f2, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7608865337113673208, guid: 0d02e7dad9fbf8f44a1e7cba0feb51f2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -820,46 +792,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 120624931}
-    - target: {fileID: 6108551207379675776, guid: 7e277d86446a85147b19f3787c840cde, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6108551207379675776, guid: 7e277d86446a85147b19f3787c840cde, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6108551207379675776, guid: 7e277d86446a85147b19f3787c840cde, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6108551207379675776, guid: 7e277d86446a85147b19f3787c840cde, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6108551207379675776, guid: 7e277d86446a85147b19f3787c840cde, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6108551207379675776, guid: 7e277d86446a85147b19f3787c840cde, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8868701336194504514, guid: 7e277d86446a85147b19f3787c840cde, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1425907908}
-    - target: {fileID: 8868701336194504514, guid: 7e277d86446a85147b19f3787c840cde, type: 3}
-      propertyPath: m_RenderMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8868701336194504514, guid: 7e277d86446a85147b19f3787c840cde, type: 3}
-      propertyPath: m_PixelPerfect
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8868701336194504514, guid: 7e277d86446a85147b19f3787c840cde, type: 3}
-      propertyPath: m_SortingOrder
-      value: -1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
