@@ -17,7 +17,7 @@ public class GridManager : MonoBehaviour
     public UnityEvent mineExploded;
     public UnityEvent<int> tileCount;
 
-    void Awake()
+    void Start()
     {
         GenerateGrid();
 
@@ -53,6 +53,15 @@ public class GridManager : MonoBehaviour
                 HandleTileRightClick(tile);
             }
         }
+    }
+
+    public void SetGridSize(int newGridSize)
+    {
+        gridSize = newGridSize;
+    }
+    public void SetMineCount(int newMineCount)
+    {
+        mineCount = newMineCount;
     }
 
     public void GenerateGrid()
