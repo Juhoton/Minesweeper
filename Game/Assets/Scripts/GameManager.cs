@@ -76,6 +76,7 @@ public class GameManager : MonoBehaviour
 
         PauseMenu.IsPaused = true;
         timeM.StopTimer();
+        AudioManager.Instance.PlayWinGame();
         youWin.gameObject.SetActive(true);
     }
 
@@ -85,6 +86,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("BOOM!!! Hävisit pelin");
 
         PauseMenu.IsPaused = true;
+        AudioManager.Instance.PlayLoseGame();
         timeM.StopTimer();
         gameOver.gameObject.SetActive(true);
     }
