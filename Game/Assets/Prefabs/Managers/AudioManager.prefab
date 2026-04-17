@@ -53,8 +53,8 @@ MonoBehaviour:
   bombClick: {fileID: 8300000, guid: 0d87b3afcef0f664dbcb377e161ad4de, type: 3}
   winGame: {fileID: 8300000, guid: 83177a83f4d5f664981810eed41945d0, type: 3}
   loseGame: {fileID: 8300000, guid: ec6541910d20f664fa9967caae92bf5e, type: 3}
-  sfxVolume: 1
-  musicVolume: 1
+  sfxVolume: 0.5
+  musicVolume: 0.5
 --- !u!1 &5194985034564049044
 GameObject:
   m_ObjectHideFlags: 0

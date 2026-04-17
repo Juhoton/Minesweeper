@@ -2,7 +2,7 @@
 - Project name: Game
 - Unity version: Unity 6000.0.71f1
 - Active game object:
-  - Name: Text (TMP)(Bombs)
+  - Name: Square
   - Tag: Untagged
-  - Layer: UI
+  - Layer: Default
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
