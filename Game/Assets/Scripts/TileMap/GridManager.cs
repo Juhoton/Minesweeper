@@ -27,10 +27,11 @@ public class GridManager : MonoBehaviour
 
     void Update()
     {
-        if (PauseMenu.IsPaused || gameOver.isActiveAndEnabled) {
+        if (PauseMenu.IsPaused || gameOver.isActiveAndEnabled)
+        {
             return;
         }
-            
+
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -57,7 +58,8 @@ public class GridManager : MonoBehaviour
         {
             for (int y = 0; y < gridSize; y++)
             {
-                Vector3 position = new Vector3(x - gridSize / 2, y - gridSize / 2, 0);
+                // We want to build the grid around 0, 0, 0
+                Vector3 position = new Vector3(x - (gridSize - 1) / 2f, y - (gridSize - 1) / 2f, 0);
                 GameObject tileObject = Instantiate(tilePrefab, position, Quaternion.identity);
                 Tile tile = tileObject.GetComponent<Tile>();
 
@@ -194,11 +196,6 @@ public class GridManager : MonoBehaviour
         bool unrevealedTiles = false;
         for (int dx = -1; dx <= 1; dx++)
         {
-            if (unrevealedTiles)
-            {
-                tile.ShowAdcjacentMines();
-                return;
-            }
             for (int dy = -1; dy <= 1; dy++)
             {
                 int nx = tile.x + dx;
@@ -215,8 +212,26 @@ public class GridManager : MonoBehaviour
                     }
                 }
             }
+            if (unrevealedTiles)
+            {
+                tile.ShowAdcjacentMines();
+                return;
+            }
         }
         tile.HideAdjacentMines();
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+
+        float size = gridSize;
+
+        Vector3 center = Vector3.zero;
+
+        Vector3 cubeSize = new Vector3(size, size, 0);
+
+        Gizmos.DrawWireCube(center, cubeSize);
     }
 
 }
