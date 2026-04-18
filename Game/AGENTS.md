@@ -8,7 +8,7 @@
   - Layers:
     - Default, TransparentFX, Ignore Raycast, Water, UI, Assets
 - Active game object:
-  - Name: Managers
+  - Name: GridManager
   - Tag: Untagged
   - Layer: Default
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->

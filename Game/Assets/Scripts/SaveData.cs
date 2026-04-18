@@ -35,10 +35,11 @@ public class SaveData : MonoBehaviour
                 if (score.difficulty == difficulty)
                 {
                     count++;
-                }
-                if (count == 10)
-                {
-                    sortedScores.Remove(score);
+                    if (count > 10)
+                    {
+                        sortedScores.Remove(score);
+                        break;
+                    }
                 }
             }
         }
