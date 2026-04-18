@@ -6,7 +6,7 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] GameObject pauseMenu;
     [SerializeField] private Canvas gameOver;
     bool isPaused = false;
-    public static bool IsPaused { get; private set; } // Makes the paused state accessible from other scripts (?)
+    public static bool IsPaused { get; set; } // Makes the paused state accessible from other scripts (?)
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -39,7 +39,7 @@ public class PauseMenu : MonoBehaviour
 
         Time.timeScale = isPaused ? 0f : 1f;
         pauseMenu.SetActive(isPaused);
-        
+
         Debug.Log(isPaused ? "Game Paused" : "Game Resumed");
     }
 

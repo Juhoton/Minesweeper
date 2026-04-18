@@ -12,7 +12,7 @@ public class WinMenu : MonoBehaviour
     public GameObject timerManager;
     private bool scoreSaved = false;
 
-    void Awake()
+    void OnEnable()
     {
         timerText.GetComponent<TextMeshProUGUI>().text = timerManager.GetComponent<TimeManager>().timerText.text;
     }
@@ -34,7 +34,7 @@ public class WinMenu : MonoBehaviour
 
     public void SaveScore()
     {
-        gameObject.GetComponent<SaveData>().Save(nameText.text, "Easy", timerText.text);
+        gameObject.GetComponent<SaveData>().Save(nameText.text, DifficultySelection.GetDifficultyName(), timerText.text);
         scoreSaved = true;
         nameText.interactable = false;
         saveScoreButton.interactable = false;

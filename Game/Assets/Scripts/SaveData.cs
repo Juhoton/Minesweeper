@@ -10,6 +10,7 @@ public class SaveData : MonoBehaviour
     void Awake()
     {
         path = Application.persistentDataPath + "/Scores.json";
+        Debug.Log("SavedataLoad");
     }
 
     public void Save(string name, string difficulty, string time)
@@ -24,8 +25,44 @@ public class SaveData : MonoBehaviour
         };
         scoreList.scores.Add(newScore);
 
+        List<Score> sortedScores = SortScore(scoreList.scores);
+
+        if (sortedScores.FindAll(score => score.difficulty == difficulty).Count > 10)
+        {
+            int count = 0;
+            foreach (Score score in sortedScores)
+            {
+                if (score.difficulty == difficulty)
+                {
+                    count++;
+                    if (count > 10)
+                    {
+                        sortedScores.Remove(score);
+                        break;
+                    }
+                }
+            }
+        }
+
+        scoreList.scores = sortedScores;
+
         string json = JsonUtility.ToJson(scoreList);
         File.WriteAllText(path, json);
+    }
+
+    private List<Score> SortScore(List<Score> scoreList)
+    {
+        scoreList.Sort((a, b) =>
+        {
+            int ToSeconds(string t)
+            {
+                var parts = t.Split(':');
+                return int.Parse(parts[0]) * 60 + int.Parse(parts[1]);
+            }
+
+            return ToSeconds(a.time).CompareTo(ToSeconds(b.time));
+        });
+        return scoreList;
     }
 
     public ScoreList Load()

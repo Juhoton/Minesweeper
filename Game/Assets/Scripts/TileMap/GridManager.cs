@@ -41,8 +41,9 @@ public class GridManager : MonoBehaviour
 
     void Update()
     {
-        if (PauseMenu.IsPaused || gameOver.isActiveAndEnabled)
+        if (PauseMenu.IsPaused)
             return;
+
 
         if (Input.GetMouseButtonDown(0))
         {
